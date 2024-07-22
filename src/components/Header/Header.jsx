@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faSearch,faGear , faArrowRight  } from "@fortawesome/free-solid-svg-icons";
-import CoinImage from "/پروژه های برنامه نویسی/CoinCup/coin-cup/public/svg/coinImage.svg";
+
 import Image from "next/image";
 import { useState } from "react";
 
@@ -77,7 +77,7 @@ const Header = () => {
           <div></div>
         </a>
       </div>
-      <div className="w-full flex justify-around items-center z-30 sticky top-10 bg-white shadow">
+      <div className="w-full flex justify-around items-center z-50 sticky top-0  bg-white shadow ">
         <div className="flex">
           <div className="cursor-pointer hover:bg-gray-100 p-5 text-sm">
             <Link href="/">Coins</Link>
@@ -94,14 +94,14 @@ const Header = () => {
             <Image
               alt="pic"
               className="p-4 cursor-pointer"
-              src={CoinImage}
+              src="svg/coinImage.svg"
               width={120}
               height={100}
             />
           </Link>
         </div>
-        <div className="relative flex flex-row items-center justify-between">
-          <div className="flex flex-col">
+        <div className="relative flex flex-row items-center justify-between ">
+          <div className="flex flex-col ">
             <div className="flex p-5 items-center justify-end relative">
               {showItem1 ? (
                 <input
@@ -179,37 +179,35 @@ const Header = () => {
             </div>
             {showScroll2 && (
               <div className="absolute top-full w-50 h-64 overflow-y-auto bg-white rounded shadow z-50">
-                <div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 1
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 2
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 3
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 4
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 5
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 6
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 7
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 8
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 9
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 10
-                  </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 1
+                </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 2
+                </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 3
+                </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 4
+                </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 5
+                </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 6
+                </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 7
+                </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 8
+                </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 9
+                </div>
+                <div className="p-4 cursor-pointer bg-gray-200 rounded">
+                  Item 10
                 </div>
               </div>
             )}
@@ -218,9 +216,13 @@ const Header = () => {
             {ShowInput ? (
               <input
                 onBlur={handleBlur}
-                className="ring-1 ring-black rounded px-1 py-1"
+                className="ring-1 ring-black rounded px-1 py-1 relative"
               />
             ) : null}
+            <input
+              onBlur={handleBlur}
+              className="ring-1 ring-black rounded px-1 py-1 hidden"
+            />
             <FontAwesomeIcon
               icon={faSearch}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
@@ -229,6 +231,40 @@ const Header = () => {
           </div>
           <div className="cursor-pointer ml-5">
             <FontAwesomeIcon icon={faGear} />
+          </div>
+        </div>
+      </div>
+      <div className="bg-blue-500 p-5 pb-28 ">
+        <div className="flex justify-around items-center mr-20 ml-20 flex-wrap">
+          <div>
+            <p className="text-white text-lg">MarcetCup </p>
+
+            <p className="text-white text-lg text-center">$2.35T</p>
+          </div>
+          <div>
+            <p className="text-white text-lg">EXCHANGE VOL </p>
+
+            <p className="text-white text-lg text-center">$59.19B</p>
+          </div>
+          <div>
+            <p className="text-white text-lg">ASSETS </p>
+
+            <p className="text-white text-lg text-center">2,297</p>
+          </div>
+          <div>
+            <p className="text-white text-lg">EXCHANGES </p>
+
+            <p className="text-white text-lg text-center">73</p>
+          </div>
+          <div>
+            <p className="text-white text-lg">MARKETS </p>
+
+            <p className="text-white text-lg text-center">8,022</p>
+          </div>
+          <div>
+            <p className="text-white text-lg">BTC DOM INDEX</p>
+
+            <p className="text-white text-lg text-center">54.8%</p>
           </div>
         </div>
       </div>

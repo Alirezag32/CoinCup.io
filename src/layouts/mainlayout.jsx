@@ -1,12 +1,18 @@
+import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 
 const MainLayout = (props) => {
   const { children } = props;
 
   return (
-    <div className=" max-width: 1280px;">
+    <div className="relative min-h-screen flex flex-col">
+    
       <Header />
-      <main className="">{children}</main>
+      
+      {children}
+      <Footer />
+      
+      
     </div>
   );
 };

@@ -1,25 +1,126 @@
-
+import { useState, useRef, useEffect, useContext } from "react";
 import { Inter } from "next/font/google";
 import MainLayout from "@/layouts/mainlayout";
 import { fetchAssets } from "@/services/mainApi";
-import axios from "axios";
+import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import formatNumber from "@/helper/formatNumber";
+import Image from "next/image";
+import { MyContext } from "@/providers/maiContext";
+
 export default function Home({ assets }) {
-  return <div>{ console.log(assets)}</div>;
+  const [visibleCount, setVisibleCount] = useState(40);
+  const divRef = useRef(null);
+  const { divHeight, setDivHeight } = useContext(MyContext);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      if (entries[0]) {
+        setDivHeight(entries[0].contentRect.height);
+      }
+    });
+
+    if (divRef.current) {
+      resizeObserver.observe(divRef.current);
+    }
+
+    return () => {
+      if (divRef.current) {
+        resizeObserver.unobserve(divRef.current);
+      }
+    };
+  }, [divRef.current]);
+
+  const handleViewMore = () => {
+    setVisibleCount((prevCount) => Math.min(prevCount + 30, 100));
+  };
+
+  const handleShowLess = () => {
+    setVisibleCount((prevCount) => Math.max(prevCount - 60, 40));
+  };
+
+  return (
+    <div
+      ref={divRef}
+      className="absolute top-60 left-1/2 transform -translate-x-1/2 w-5/6 z-40 flex flex-col shadow-custom bg-white p-6 text-xs "
+    >
+      <div className="flex w-full border-b pb-2">
+        <div className="w-1/12 cursor-pointer">
+          Rank <FontAwesomeIcon className="ml-2" icon={faCaretUp} />
+        </div>
+        <div className="w-2/12 cursor-pointer">Name</div>
+        <div className="w-1/12 cursor-pointer">Price</div>
+        <div className="w-2/12 cursor-pointer">MarketCap</div>
+        <div className="w-2/12 cursor-pointer">low(24H)</div>
+        <div className="w-2/12 cursor-pointer">high(24H)</div>
+        <div className="w-1/12 cursor-pointer">Change(24Hr)</div>
+      </div>
+      {assets.slice(0, visibleCount).map((item, index) => {
+        const priceChange24h = item.price_change_percentage_24h.toFixed(2);
+        const priceChangeColor =
+          priceChange24h >= 0 ? "text-green-500" : "text-red-500";
+
+        return (
+          <div
+            key={index}
+            className="flex w-full border-b border-gray-200 py-3 text-xs cursor-pointer transition-colors duration-300 "
+          >
+            <div className="w-1/12">{item.market_cap_rank}</div>
+            <div className="w-2/12 flex items-center">
+              <Image
+                src={item.image}
+                alt={item.name}
+                width={24}
+                height={24}
+                className="mr-2"
+              />
+              <div className="flex flex-col">
+                <span>{item.name}</span>
+                <span className="font-weight: 100 my-1 text-gray-400">
+                  {item.symbol}
+                </span>
+              </div>
+            </div>
+            <div className="w-1/12">${item.current_price}</div>
+            <div className="w-2/12">{formatNumber(item.market_cap)}</div>
+            <div className="w-2/12">${item.low_24h}</div>
+            <div className="w-2/12">${item.high_24h}</div>
+            <div className={`w-1/12 ${priceChangeColor}`}>
+              {priceChange24h}%
+            </div>
+          </div>
+        );
+      })}
+      <div className="flex justify-center mt-4">
+        {visibleCount < 100 ? (
+          <button
+            onClick={handleViewMore}
+            className="bg-green-500 text-white px-4 py-2 rounded-full"
+          >
+            View More
+          </button>
+        ) : (
+          <button
+            onClick={handleShowLess}
+            className="bg-green-500 text-white px-4 py-2 rounded-full"
+          >
+            Show Less
+          </button>
+        )}
+      </div>
+    </div>
+  );
 }
 
 Home.getLayout = function getLayout(page) {
   return <MainLayout>{page}</MainLayout>;
 };
 
-
-
 export async function getServerSideProps() {
   const assets = await fetchAssets();
-  console.log(assets)
-
   return {
     props: {
       assets,
     },
-  }
-};
+  };
+}
