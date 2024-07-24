@@ -59,7 +59,7 @@ export default function Home({ assets }) {
           Change(24Hr)
         </div>
       </div>
-      {assets.slice(0, visibleCount).map((item, index) => {
+      {assets?.slice(0, visibleCount).map((item, index) => {
         const priceChange24h = item.price_change_percentage_24h.toFixed(2);
         const priceChangeColor =
           priceChange24h >= 0 ? "text-green-500" : "text-red-500";
@@ -128,9 +128,12 @@ Home.getLayout = function getLayout(page) {
 
 export async function getServerSideProps() {
   const assets = await fetchAssets();
+  console.log(assets)
+
   return {
     props: {
       assets,
     },
-  };
-}
+  }
+};
+  

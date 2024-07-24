@@ -7,24 +7,26 @@ import Image from "next/image";
 const Footer = () => {
   const { divHeight } = useContext(MyContext);
 
-  const [isSmallScreen, setIsSmallScreen] = useState(
-    window.matchMedia("(max-width: 768px)").matches
-  );
+   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
+   useEffect(() => {
+     // تابعی برای به‌روزرسانی وضعیت صفحه نمایش
+     const updateMediaQuery = () => {
+       setIsSmallScreen(window.matchMedia("(max-width: 768px)").matches);
+     };
 
-    const handleResize = (event) => {
-      setIsSmallScreen(event.matches);
-    };
+     // بررسی اولیه
+     updateMediaQuery();
 
-    mediaQuery.addEventListener("change", handleResize);
+     // تنظیم listener برای تغییرات اندازه صفحه
+     const mediaQueryList = window.matchMedia("(max-width: 768px)");
+     mediaQueryList.addEventListener("change", updateMediaQuery);
 
-    // Clean up listener on unmount
-    return () => {
-      mediaQuery.removeEventListener("change", handleResize);
-    };
-  }, []);
+     // تمیز کردن listener هنگامUnmount
+     return () => {
+       mediaQueryList.removeEventListener("change", updateMediaQuery);
+     };
+   }, []);
   
 
   return (
