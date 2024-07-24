@@ -31,6 +31,8 @@ export default function Home({ assets }) {
     };
   }, [divRef.current]);
 
+  
+
   const handleViewMore = () => {
     setVisibleCount((prevCount) => Math.min(prevCount + 30, 100));
   };
@@ -42,18 +44,20 @@ export default function Home({ assets }) {
   return (
     <div
       ref={divRef}
-      className="absolute top-60 left-1/2 transform -translate-x-1/2 w-5/6 z-40 flex flex-col shadow-custom bg-white p-6 text-xs "
+      className="absolute max-md:static top-60 left-1/2 transform -translate-x-1/2 max-md:-translate-x-0 w-5/6 max-md:w-full z-10 flex flex-col shadow-custom bg-white p-6 text-xs"
     >
       <div className="flex w-full border-b pb-2">
-        <div className="w-1/12 cursor-pointer">
+        <div className="w-1/12 max-md:hidden cursor-pointer">
           Rank <FontAwesomeIcon className="ml-2" icon={faCaretUp} />
         </div>
-        <div className="w-2/12 cursor-pointer">Name</div>
-        <div className="w-1/12 cursor-pointer">Price</div>
-        <div className="w-2/12 cursor-pointer">MarketCap</div>
-        <div className="w-2/12 cursor-pointer">low(24H)</div>
-        <div className="w-2/12 cursor-pointer">high(24H)</div>
-        <div className="w-1/12 cursor-pointer">Change(24Hr)</div>
+        <div className="w-3/12 max-md:w-6/12 cursor-pointer">Name</div>
+        <div className="w-2/12 max-md:w-3/12 cursor-pointer">Price</div>
+        <div className="w-3/12 max-lg:hidden cursor-pointer">MarketCap</div>
+        <div className="w-2/12 max-md:hidden cursor-pointer">Low(24H)</div>
+        <div className="w-2/12 max-md:hidden cursor-pointer">High(24H)</div>
+        <div className="w-2/12 max-md:w-3/12 cursor-pointer text-right">
+          Change(24Hr)
+        </div>
       </div>
       {assets.slice(0, visibleCount).map((item, index) => {
         const priceChange24h = item.price_change_percentage_24h.toFixed(2);
@@ -63,10 +67,12 @@ export default function Home({ assets }) {
         return (
           <div
             key={index}
-            className="flex w-full border-b border-gray-200 py-3 text-xs cursor-pointer transition-colors duration-300 "
+            className="flex w-full border-b border-gray-200 py-3 text-xs cursor-pointer transition-colors duration-300"
           >
-            <div className="w-1/12">{item.market_cap_rank}</div>
-            <div className="w-2/12 flex items-center">
+            <div className="w-1/12 max-md:hidden ml-1">
+              {item.market_cap_rank}
+            </div>
+            <div className="w-3/12 max-md:w-6/12 flex items-center">
               <Image
                 src={item.image}
                 alt={item.name}
@@ -81,11 +87,15 @@ export default function Home({ assets }) {
                 </span>
               </div>
             </div>
-            <div className="w-1/12">${item.current_price}</div>
-            <div className="w-2/12">{formatNumber(item.market_cap)}</div>
-            <div className="w-2/12">${item.low_24h}</div>
-            <div className="w-2/12">${item.high_24h}</div>
-            <div className={`w-1/12 ${priceChangeColor}`}>
+            <div className="w-2/12 max-md:w-3/12">${item.current_price}</div>
+            <div className="w-3/12 max-lg:hidden">
+              {formatNumber(item.market_cap)}
+            </div>
+            <div className="w-2/12 max-md:hidden">${item.low_24h}</div>
+            <div className="w-2/12 max-md:hidden">${item.high_24h}</div>
+            <div
+              className={`w-2/12 max-md:w-3/12 text-right ${priceChangeColor}`}
+            >
               {priceChange24h}%
             </div>
           </div>

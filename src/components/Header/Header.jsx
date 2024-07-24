@@ -1,43 +1,22 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { faSearch,faGear , faArrowRight  } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 import Image from "next/image";
 import { useState } from "react";
+import Navbar from "./Navbar/navbar";
+import MdNavbar from "./Navbar/mdNavbar";
 
 const Header = () => {
-  const [showItem1, setShowItem1] = useState(false);
-  const [showScroll, setShowScroll] = useState(false);
-  const [showItem2, setShowItem2] = useState(false);
-  const [showScroll2, setShowScroll2] = useState(false);
-  const [ShowInput, setShowInput] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-  function toggleItem1() {
-    setShowItem1(!showItem1);
-    setShowScroll(!showItem1);
-  }
-  function toggleItem2() {
-    setShowItem2(!showItem2);
-    setShowScroll2(!showItem2);
-  }
-  function toggleInput() {
-    setShowInput(!ShowInput)
-    
-  }
-
-  function handleBlur() {
-    console.log("OPS!!!")
-    setShowItem1(false)
-    setShowScroll(false)
-    setShowItem2(false)
-    setShowScroll2(false)
-    setShowInput(false)
-  }
+  const toggleDrawer = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
-      <div className="bg-custom-gradient h-10 w-full">
+      <div className="bg-custom-gradient  w-full">
         <a
           className="text-white flex justify-center items-center text-xs"
           href=""
@@ -77,195 +56,73 @@ const Header = () => {
           <div></div>
         </a>
       </div>
-      <div className="w-full flex justify-around items-center z-50 sticky top-0  bg-white shadow ">
-        <div className="flex">
-          <div className="cursor-pointer hover:bg-gray-100 p-5 text-sm">
-            <Link href="/">Coins</Link>
-          </div>
-          <div className="cursor-pointer hover:bg-gray-100 p-5 text-sm">
-            <Link href="/">Exchange</Link>
-          </div>
-          <div className="cursor-pointer hover:bg-gray-100 p-5 text-sm">
-            <Link href="/">Swap</Link>
-          </div>
-        </div>
-        <div>
-          <Link href="/">
-            <Image
-              alt="pic"
-              className="p-4 cursor-pointer"
-              src="svg/coinImage.svg"
-              width={120}
-              height={100}
-            />
-          </Link>
-        </div>
-        <div className="relative flex flex-row items-center justify-between ">
-          <div className="flex flex-col ">
-            <div className="flex p-5 items-center justify-end relative">
-              {showItem1 ? (
-                <input
-                  className="border-none text-sm p-2 rounded outline-none mr-2 w-14"
-                  placeholder="USD"
-                  type="text"
-                  onBlur={handleBlur}
-                />
-              ) : (
-                <div onClick={toggleItem1} className="mr-2 cursor-pointer">
-                  USD
-                </div>
-              )}
-              <FontAwesomeIcon
-                icon={faCaretDown}
-                onClick={toggleItem1}
-                className="cursor-pointer"
-              />
-            </div>
-            {showScroll && (
-              <div className="absolute top-full w-50 h-64 overflow-y-auto bg-white rounded shadow z-50">
-                <div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 1
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 2
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 3
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 4
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 5
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 6
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 7
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 8
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 9
-                  </div>
-                  <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                    Item 10
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="flex">
-            <div className="flex p-5 items-center relative">
-              {showItem2 ? (
-                <input
-                  className="border-none text-sm p-2 rounded outline-none mr-2 w-14"
-                  placeholder="English"
-                  type="text"
-                />
-              ) : (
-                <div onClick={toggleItem2} className="mr-2 cursor-pointer">
-                  English
-                </div>
-              )}
-              <FontAwesomeIcon
-                icon={faCaretDown}
-                onClick={toggleItem2}
-                className="cursor-pointer"
-              />
-            </div>
-            {showScroll2 && (
-              <div className="absolute top-full w-50 h-64 overflow-y-auto bg-white rounded shadow z-50">
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 1
-                </div>
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 2
-                </div>
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 3
-                </div>
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 4
-                </div>
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 5
-                </div>
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 6
-                </div>
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 7
-                </div>
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 8
-                </div>
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 9
-                </div>
-                <div className="p-4 cursor-pointer bg-gray-200 rounded">
-                  Item 10
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="relative ml-5">
-            {ShowInput ? (
-              <input
-                onBlur={handleBlur}
-                className="ring-1 ring-black rounded px-1 py-1 relative"
-              />
-            ) : null}
-            <input
-              onBlur={handleBlur}
-              className="ring-1 ring-black rounded px-1 py-1 hidden"
-            />
-            <FontAwesomeIcon
-              icon={faSearch}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-              onClick={toggleInput}
-            />
-          </div>
-          <div className="cursor-pointer ml-5">
-            <FontAwesomeIcon icon={faGear} />
-          </div>
-        </div>
-      </div>
-      <div className="bg-blue-500 p-5 pb-28 ">
-        <div className="flex justify-around items-center mr-20 ml-20 flex-wrap">
-          <div>
-            <p className="text-white text-lg">MarcetCup </p>
-
+      <Navbar />
+      <MdNavbar />
+      <div className="bg-blue-500 p-5 pb-28 max-md:pb-5">
+        <div className="hidden md:flex justify-around items-center mr-20 ml-20 flex-wrap">
+          <div className="p-2">
+            <p className="text-white text-lg">MarketCap</p>
             <p className="text-white text-lg text-center">$2.35T</p>
           </div>
-          <div>
-            <p className="text-white text-lg">EXCHANGE VOL </p>
-
+          <div className="p-2">
+            <p className="text-white text-lg">EXCHANGE VOL</p>
             <p className="text-white text-lg text-center">$59.19B</p>
           </div>
-          <div>
-            <p className="text-white text-lg">ASSETS </p>
-
+          <div className="p-2">
+            <p className="text-white text-lg">ASSETS</p>
             <p className="text-white text-lg text-center">2,297</p>
           </div>
-          <div>
-            <p className="text-white text-lg">EXCHANGES </p>
-
+          <div className="p-2">
+            <p className="text-white text-lg">EXCHANGES</p>
             <p className="text-white text-lg text-center">73</p>
           </div>
-          <div>
-            <p className="text-white text-lg">MARKETS </p>
-
+          <div className="p-2">
+            <p className="text-white text-lg">MARKETS</p>
             <p className="text-white text-lg text-center">8,022</p>
           </div>
-          <div>
+          {/* <div className="p-2">
             <p className="text-white text-lg">BTC DOM INDEX</p>
-
             <p className="text-white text-lg text-center">54.8%</p>
+          </div> */}
+        </div>
+
+        <div className="md:hidden">
+          <div
+            className="flex justify-between items-center cursor-pointer"
+            onClick={toggleDrawer}
+          >
+            <p className="text-white text-lg">Market Snapshot</p>
+            <span className="text-white text-lg">{isOpen ? "▲" : "▼"}</span>
           </div>
+
+          {isOpen && (
+            <div className="flex flex-col items-start mt-4">
+              <div className="border-b border-gray-300 p-2 flex justify-between w-full">
+                <p className="text-white text-base">MarketCap</p>
+                <p className="text-white text-base text-right">$2.35T</p>
+              </div>
+              <div className="border-b border-gray-300 p-2 flex justify-between w-full">
+                <p className="text-white text-base">EXCHANGE VOL</p>
+                <p className="text-white text-base text-right">$59.19B</p>
+              </div>
+              <div className="border-b border-gray-300 p-2 flex justify-between w-full">
+                <p className="text-white text-base">ASSETS</p>
+                <p className="text-white text-base text-right">2,297</p>
+              </div>
+              <div className="border-b border-gray-300 p-2 flex justify-between w-full">
+                <p className="text-white text-base">EXCHANGES</p>
+                <p className="text-white text-base text-right">73</p>
+              </div>
+              <div className="border-b border-gray-300 p-2 flex justify-between w-full">
+                <p className="text-white text-base">MARKETS</p>
+                <p className="text-white text-base text-right">8,022</p>
+              </div>
+              <div className="border-b border-gray-300 p-2 flex justify-between w-full">
+                <p className="text-white text-base">BTC DOM INDEX</p>
+                <p className="text-white text-base text-right">54.8%</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

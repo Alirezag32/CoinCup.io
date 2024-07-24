@@ -1,5 +1,5 @@
 import { MyContext } from "@/providers/maiContext";
-import { useContext } from "react";
+import { useContext , useDeferredValue , useState , useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
@@ -7,10 +7,30 @@ import Image from "next/image";
 const Footer = () => {
   const { divHeight } = useContext(MyContext);
 
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    window.matchMedia("(max-width: 768px)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+
+    const handleResize = (event) => {
+      setIsSmallScreen(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleResize);
+
+    // Clean up listener on unmount
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
+  
+
   return (
     <div
-      style={{ marginTop: `${divHeight}px` }}
-      className="w-full bg-blue-600 text-white p-4"
+      style={{ marginTop: isSmallScreen ? "100px" : `${divHeight+100}px` }}
+      className="w-full bg-blue-600 text-white p-4 max-md:mt-0 "
     >
       <div className="flex flex-wrap justify-around mr-10 ml-20 my-10 md:justify-between">
         <div className="flex flex-col items-start w-1/2 md:w-1/4 mb-4">
