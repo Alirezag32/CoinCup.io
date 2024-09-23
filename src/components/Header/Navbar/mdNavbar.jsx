@@ -69,7 +69,7 @@ const MdNavbar = () => {
   return (
     <>
       <div className="w-full flex justify-between items-center z-20 sticky top-0 bg-white shadow md:hidden">
-        <div className="relative ml-5">
+        <div className="relative ml-10">
           {ShowInput ? (
             <input
               onBlur={handleBlur}
