@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <div className={inter.className}>
         <MyProvider>{getLayout(<Component {...pageProps} />)}</MyProvider>
-        {/* <ToastContainer /> */}
+        
       </div>
     </>
   );

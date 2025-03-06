@@ -44,7 +44,7 @@ export default function Home({ assets }) {
   return (
     <div
       ref={divRef}
-      className="absolute max-md:static top-60 left-1/2 transform -translate-x-1/2 max-md:-translate-x-0 w-5/6 max-md:w-full z-10 flex flex-col shadow-custom bg-white p-6 text-xs"
+      className="absolute max-md:static top-[210px] max-lg::top-[250px] left-1/2 transform -translate-x-1/2 max-md:-translate-x-0 w-8/12 max-md:w-full z-10 flex flex-col shadow-custom bg-white p-6 text-xs rounded-tl-md"
     >
       <div className="flex w-full border-b pb-2">
         <div className="w-1/12 max-md:hidden cursor-pointer">

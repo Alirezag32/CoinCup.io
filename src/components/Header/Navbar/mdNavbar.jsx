@@ -12,14 +12,22 @@ import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-
+import { useRouter } from "next/router";
 const MdNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showItem1, setShowItem1] = useState(false);
           const [showScroll, setShowScroll] = useState(false);
           const [showScroll2, setShowScroll2] = useState(false);
           const [showItem2, setShowItem2] = useState(false);
-          const [ShowInput, setShowInput] = useState(false);
+  const [ShowInput, setShowInput] = useState(false);
+     const [query, setQuery] = useState("");
+     const router = useRouter();
+  
+     const handleKeyDown = (e) => {
+       if (e.key === "Enter" && query.trim()) {
+         router.push(`/crypto/${query.trim().toLowerCase()}`);
+       }
+     };
           
   const inputRef = useRef(null);
 
@@ -73,6 +81,8 @@ const MdNavbar = () => {
           {ShowInput ? (
             <input
               onBlur={handleBlur}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
               className="ring-1 ring-black rounded px-1 py-1 relative text-xs w-25"
             />
           ) : null}

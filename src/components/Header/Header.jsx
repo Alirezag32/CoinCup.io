@@ -59,26 +59,26 @@ const Header = () => {
       <Navbar />
       <MdNavbar />
       <div className="bg-blue-500 p-5 pb-28 max-md:pb-5">
-        <div className="hidden md:flex justify-around items-center mr-20 ml-20 flex-wrap">
+        <div className="hidden md:flex justify-around items-center mr-auto ml-auto flex-wrap text-base w-9/12">
           <div className="p-2">
-            <p className="text-white text-lg">MarketCap</p>
-            <p className="text-white text-lg text-center">$2.35T</p>
+            <p className="text-white ">MarketCap</p>
+            <p className="text-white  text-center">$2.35T</p>
           </div>
           <div className="p-2">
-            <p className="text-white text-lg">EXCHANGE VOL</p>
-            <p className="text-white text-lg text-center">$59.19B</p>
+            <p className="text-white ">EXCHANGE VOL</p>
+            <p className="text-white  text-center">$59.19B</p>
           </div>
           <div className="p-2">
-            <p className="text-white text-lg">ASSETS</p>
-            <p className="text-white text-lg text-center">2,297</p>
+            <p className="text-white ">ASSETS</p>
+            <p className="text-white  text-center">2,297</p>
           </div>
           <div className="p-2">
-            <p className="text-white text-lg">EXCHANGES</p>
-            <p className="text-white text-lg text-center">73</p>
+            <p className="text-white ">EXCHANGES</p>
+            <p className="text-white  text-center">73</p>
           </div>
           <div className="p-2">
-            <p className="text-white text-lg">MARKETS</p>
-            <p className="text-white text-lg text-center">8,022</p>
+            <p className="text-white ">MARKETS</p>
+            <p className="text-white  text-center">8,022</p>
           </div>
           {/* <div className="p-2">
             <p className="text-white text-lg">BTC DOM INDEX</p>
