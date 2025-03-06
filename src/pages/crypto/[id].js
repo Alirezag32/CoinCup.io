@@ -25,6 +25,7 @@ export default function CryptoDetail() {
         }
 
         const data = await res.json();
+        console.log(data)
         if (data.error) {
           console.warn(`⚠️ کوین "${id}" یافت نشد.`);
           router.push("/404");
@@ -89,16 +90,18 @@ export default function CryptoDetail() {
         </div>
 
         <p className="mt-2 text-gray-300">
-          رتبه بازار: #{coin.market_cap_rank}
+          Market Rank: #{coin.market_cap_rank}
         </p>
         <p className="mt-1">
-          💰 قیمت: ${coin.market_data.current_price.usd.toLocaleString()}
+          💰 price : ${coin.market_data.current_price.usd.toLocaleString()}
         </p>
         <p>
-          📉 تغییر ۲۴ ساعته:{" "}
+          24-hour changes :{" "}
           {coin.market_data.price_change_percentage_24h.toFixed(2)}%
         </p>
-        <p>📊 حجم بازار: ${coin.market_data.market_cap.usd.toLocaleString()}</p>
+        <p>
+          📊 Market size :  ${coin.market_data.market_cap.usd.toLocaleString()}
+        </p>
 
         {chartData && (
           <div className="mt-6 bg-gray-800 p-4 rounded-lg">
