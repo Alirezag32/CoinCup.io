@@ -52,7 +52,7 @@ export default function CryptoDetail() {
           ),
           datasets: [
             {
-              label: "قیمت در ۷ روز گذشته (دلار)",
+              label: 'price in 7 days',
               data: chartData.prices.map((p) => p[1]),
               borderColor: "#1DB954",
               backgroundColor: "rgba(29, 185, 84, 0.2)",
@@ -105,7 +105,7 @@ export default function CryptoDetail() {
 
         {chartData && (
           <div className="mt-6 bg-gray-800 p-4 rounded-lg">
-            <h2 className="text-xl font-semibold">📈 نمودار قیمت ۷ روز اخیر</h2>
+            <h2 className="text-xl font-semibold">📈 price chart around 7 days</h2>
             <Line data={chartData} />
           </div>
         )}
