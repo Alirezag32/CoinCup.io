@@ -52,7 +52,7 @@ export default function CryptoDetail() {
           ),
           datasets: [
             {
-              label: 'price in 7 days',
+              label: 'price in this day (dollar)',
               data: chartData.prices.map((p) => p[1]),
               borderColor: "#1DB954",
               backgroundColor: "rgba(29, 185, 84, 0.2)",
