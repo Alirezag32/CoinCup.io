@@ -69,7 +69,7 @@ export default function CryptoDetail() {
     fetchData();
   }, [id]);
 
-  if (!coin) return <p className="text-white">در حال بارگذاری...</p>;
+  if (!coin) return <p className="text-white">loading ...</p>;
 
   return (
     <>
