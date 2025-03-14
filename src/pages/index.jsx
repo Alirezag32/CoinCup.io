@@ -7,11 +7,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import formatNumber from "@/helper/formatNumber";
 import Image from "next/image";
 import { MyContext } from "@/providers/maiContext";
+import { PrismaClient } from "@prisma/client";
+
+  const prisma = new PrismaClient();
+
 
 export default function Home({ assets }) {
   const [visibleCount, setVisibleCount] = useState(40);
   const divRef = useRef(null);
   const { divHeight, setDivHeight } = useContext(MyContext);
+
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
@@ -126,14 +131,34 @@ Home.getLayout = function getLayout(page) {
   return <MainLayout>{page}</MainLayout>;
 };
 
-export async function getServerSideProps() {
-  const assets = await fetchAssets();
-  console.log(assets)
+// export async function getServerSideProps() {
+//   const assets = await fetchAssets();
+//   console.log(assets)
 
-  return {
-    props: {
-      assets,
-    },
+//   return {
+//     props: {
+//       assets,
+//     },
+//   }
+// };
+  export async function getServerSideProps() {
+    // گرفتن داده‌ها از دیتابیس
+    const assets = await prisma.cryptoCurrency.findMany();
+    console.log(assets);
+    const serializedAssets = assets.map((asset) => ({
+      ...asset,
+      ath_date: asset.ath_date ? asset.ath_date.toISOString() : null,
+      atl_date: asset.atl_date ? asset.atl_date.toISOString() : null,
+      last_updated: asset.last_updated
+        ? asset.last_updated.toISOString()
+        : null,
+    }));
+
+    return {
+      props: {
+        assets: serializedAssets,
+      },
+    };
   }
-};
+
   
